@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Emacs
-alias emacs='/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
-alias emacsclient='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient'
 alias emacsd='emacs --daemon'
 alias ec='emacsclient'
 alias ect='ec -t'
