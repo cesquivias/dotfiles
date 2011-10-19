@@ -4,3 +4,5 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 ln -s "$DIR/.hgrc" ~
 ln -s "$DIR/.bash_aliases" ~
+ln -s "$DIR/.screenrc" ~
+
