@@ -1,0 +1,8 @@
+[user]
+	name = Cristian Esquivias
+	email = cristian.esquivias@gmail.com
+
+[alias]
+    st = status
+    df = diff --ignore-all-space
+    co = checkout
