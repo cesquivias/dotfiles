@@ -5,6 +5,7 @@ alias emacsd='emacs --daemon'
 alias ec='emacsclient'
 alias ect='ec -t'
 alias ecn='ec -n'
+alias eccn='emacsclient -c -n'
 
 # jruby
 alias jake='jruby -S rake'
