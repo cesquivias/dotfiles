@@ -1,12 +1,6 @@
 #!/bin/sh
 
-export EDITOR=emacsclient
-export PATH=~/.bin:/opt/bin:$PATH
-
-# less highlighting
-if [ -f /usr/share/source-highlight/src-hilite-lesspipe.sh ]
+if [ -f ~/.bashrc]
 then
-    export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-    export LESS=' -R '
+    source ~/.bashrc
 fi
-
