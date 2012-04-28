@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -f ~/.bashrc]
+if [ -f ~/.bashrc ]
 then
     source ~/.bashrc
 fi
