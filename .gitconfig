@@ -4,5 +4,6 @@
 
 [alias]
     st = status
-    df = diff --ignore-all-space
+    df = diff --ignore-all-space --color
     co = checkout
+    undo-commit = reset --soft HEAD^
