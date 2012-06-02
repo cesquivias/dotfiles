@@ -1,0 +1,13 @@
+urxvt.background:                   black
+urxvt.foreground:                   green
+urxvt.cursorColor:                  white
+urxvt.cursorBlink:                  true
+urxvt.font:                         9x15
+urxvt.boldFont:                     9x15bold
+urxvt.boldMode:                     true
+urxvt.geometry:                     80x45+100+0
+
+urxvt.perl-ext-common: default,url-select
+urxvt.keysym.M-u: perl:url-select:select_next
+urxvt.urlLauncher: firefox
+urxvt.underlineURLs: true
