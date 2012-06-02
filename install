@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-ln -s "$DIR/.hgrc" ~
-ln -s "$DIR/.bash_aliases" ~
-ln -s "$DIR/.screenrc" ~
-ln -s "$DIR/.gitconfig" ~
+for f in .hgrc .bash_aliases .bashrc .bash_profile .Xdefaults .screenrc .gitconfig
+do
+    ln -si "$DIR/$f" ~
+done
