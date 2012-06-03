@@ -4,5 +4,9 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 for f in .hgrc .bash_aliases .bashrc .bash_profile .Xdefaults .screenrc .gitconfig
 do
-    ln -si "$DIR/$f" ~
+    ln -s "$DIR/$f" ~
 done
+
+if [ `uname -o` == "Cygwin" ]; then
+    ln -s "$DIR/.startxwinrc" ~
+fi
