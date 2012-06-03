@@ -4,7 +4,11 @@
 username = Cristian Esquivias <cristian.esquivias@gmail.com>
 
 [alias]
-df = diff
+df = diff --ignore-all-space
 
 [extensions]
 color =
+pager =
+
+[pager]
+attend = diff, df, log, help

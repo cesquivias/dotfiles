@@ -105,12 +105,13 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # less highlighting
+export LESS=' -R '
 if [ -f /usr/share/source-highlight/src-hilite-lesspipe.sh ]
 then
     export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-    export LESS=' -R '
 fi
 
 # Environment Variables
 export PATH=~/.bin:/opt/bin:$PATH
 export EDITOR=emacsclient
+export PAGER=less
