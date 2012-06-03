@@ -8,3 +8,4 @@ urxvt.boldFont:                     9x15bold
 urxvt.boldMode:                     true
 urxvt.geometry:                     80x45-0+0
 urxvt.visualBell:                   false
+urxvt.iconFile:                     /usr/share/icons/gnome/48x48/apps/utilities-terminal.png
