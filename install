@@ -7,6 +7,6 @@ do
     ln -s "$DIR/$f" ~
 done
 
-if [ `uname -o` == "Cygwin" ]; then
+if [ `uname -o 2> /dev/null || uname -s` == "Cygwin" ]; then
     ln -s "$DIR/.startxwinrc" ~
 fi
