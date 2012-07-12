@@ -7,3 +7,18 @@
     df = diff --ignore-all-space --color
     co = checkout
     undo-commit = reset --soft HEAD^
+
+[color]
+    diff = auto
+    status = auto
+
+[color "diff"]
+       meta = yellow
+       frag = yellow bold
+       new = cyan
+       old = red
+
+[color "status"]
+       added = cyan
+       untracked = yellow
+       changed = magenta
