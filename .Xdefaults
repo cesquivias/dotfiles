@@ -6,6 +6,6 @@ urxvt.cursorBlink:                  true
 urxvt.font:                         9x15
 urxvt.boldFont:                     9x15bold
 urxvt.boldMode:                     true
-urxvt.geometry:                     80x45-0+0
+urxvt.geometry:                     80x45
 urxvt.visualBell:                   false
 urxvt.iconFile:                     /usr/share/icons/gnome/48x48/apps/utilities-terminal.png
