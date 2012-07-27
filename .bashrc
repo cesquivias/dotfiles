@@ -115,3 +115,4 @@ fi
 export PATH=~/.bin:/opt/bin:$PATH
 export EDITOR=emacsclient
 export PAGER=less
+export GREP_OPTIONS='--color=auto'
