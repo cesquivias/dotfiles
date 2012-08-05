@@ -112,6 +112,6 @@ then
 fi
 
 # Environment Variables
-export PATH=~/.bin:/opt/bin:$PATH
+export PATH=~/.bin:/opt/bin:/opt/local/bin:/opt/local/sbin:$PATH
 export EDITOR=emacsclient
 export PAGER=less
