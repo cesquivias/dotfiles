@@ -60,7 +60,7 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+xterm*|rxvt*|screen)
     PS1="\[\033[1;32m\]\u\[\033[00m\]@\h:\[\033[0;31m\]\w\[\033[00m\]\$ "
     ;;
 *)
@@ -80,7 +80,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -lFh'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -115,3 +115,4 @@ fi
 export PATH=~/.bin:/opt/bin:/opt/local/bin:/opt/local/sbin:$PATH
 export EDITOR=emacsclient
 export PAGER=less
+export GREP_OPTIONS='--color=auto'
