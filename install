@@ -2,11 +2,12 @@
 
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
-for f in .hgrc .bash_aliases .bashrc .bash_profile .Xdefaults .screenrc .gitconfig
+for f in .hgrc .bash_aliases .bashrc .bash_profile .bash_functions .Xdefaults .screenrc .gitconfig
 do
     ln -s "$DIR/$f" ~
 done
 
-if [ `uname -o 2> /dev/null || uname -s` == "Cygwin" ]; then
+PLATFORM=`uname -o 2> /dev/null || uname -s`
+if [ $PLATFORM == "Cygwin" ]; then
     ln -s "$DIR/.startxwinrc" ~
 fi
