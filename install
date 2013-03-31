@@ -10,3 +10,6 @@ done
 if [ `uname -o 2> /dev/null || uname -s` = "Cygwin" ]; then
     ln -s "$DIR/.startxwinrc" ~
 fi
+
+# Adding ~/.bin directory
+mkdir -p ~/.bin
