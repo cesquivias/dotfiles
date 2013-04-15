@@ -8,6 +8,7 @@
     st = status
     df = diff --ignore-all-space --color
     co = checkout
+    br = branch
     undo-commit = reset --soft HEAD^
 
 [color]
