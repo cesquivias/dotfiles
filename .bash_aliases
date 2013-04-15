@@ -17,3 +17,7 @@ alias pod='popd'
 
 # process
 alias ipgrep='pgrep -i'
+
+cdl () {
+    cd "$1" && ls
+}
