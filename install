@@ -8,6 +8,6 @@ do
 done
 
 PLATFORM=`uname -o 2> /dev/null || uname -s`
-if [ $PLATFORM == "Cygwin" ]; then
+if [ $PLATFORM = "Cygwin" ]; then
     ln -s "$DIR/.startxwinrc" ~
 fi

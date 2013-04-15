@@ -38,6 +38,9 @@ register [ "\033:se noai\015a"
 register ] "\033:se ai\015a"
 bind ^] paste [.]
 
+# emacs keybindings for copy/history mode
+markkeys h=^B:l=^F:j=^N:k=^P:^F=^V:^B=^[b
+
 ################
 #
 # xterm tweaks
