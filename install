@@ -11,3 +11,9 @@ PLATFORM=`uname -o 2> /dev/null || uname -s`
 if [ $PLATFORM = "Cygwin" ]; then
     ln -s "$DIR/.startxwinrc" ~
 fi
+
+# Install fish config
+FISH_FUNC_DIR=~/.config/fish/functions
+mkdir -p $FISH_FUNC_DIR
+
+cp fish_functions/*.fish $FISH_FUNC_DIR
