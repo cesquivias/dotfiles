@@ -39,7 +39,8 @@ register ] "\033:se ai\015a"
 bind ^] paste [.]
 
 # emacs keybindings for copy/history mode
-markkeys h=^B:l=^F:j=^N:k=^P:^F=^V:^B=^[b
+markkeys h=^B:l=^F:j=^N:k=^P:^F=^V:$=^E:0=^A:B=@:^B=^[v
+# bindkey -m -k "\303\266" kP
 
 ################
 #
