@@ -1,3 +1,4 @@
+
 urxvt.depth:                        32
 urxvt.background:                   black
 urxvt.foreground:                   green
@@ -21,3 +22,17 @@ rxvt.boldMode:                     true
 rxvt.geometry:                     80x45
 rxvt.visualBell:                   false
 rxvt.iconFile:                     /usr/share/icons/gnome/48x48/apps/utilities-terminal.png
+
+*xterm*.toolBar:                   off
+*xterm*.background:                #000000
+*xterm*.foreground:                green
+*xterm*.geometry:                  80x45
+*xterm*.borderWidth:               0
+#xterm.depth:                        32
+#xterm.cursorColor:                  white
+#xterm.cursorBlink:                  true
+#xterm.font:                         9x15
+#xterm.boldFont:                     9x15bold
+#xterm.boldMode:                     true
+#xterm.visualBell:                   false
+#xterm.iconFile:                     /usr/share/icons/gnome/48x48/apps/utilities-terminal.png
