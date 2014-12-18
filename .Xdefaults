@@ -8,6 +8,8 @@ urxvt.font:                         9x15
 urxvt.boldFont:                     9x15bold
 urxvt.boldMode:                     true
 urxvt.geometry:                     80x45
+urxvt.scrollBar:                    true
+urxvt.scrollBar_right:              true
 urxvt.visualBell:                   false
 urxvt.iconFile:                     /usr/share/icons/gnome/48x48/apps/utilities-terminal.png
 
@@ -20,6 +22,8 @@ rxvt.font:                         9x15
 rxvt.boldFont:                     9x15bold
 rxvt.boldMode:                     true
 rxvt.geometry:                     80x45
+rxvt.scrollBar:                    true
+rxvt.scrollBar_right:              true
 rxvt.visualBell:                   false
 rxvt.iconFile:                     /usr/share/icons/gnome/48x48/apps/utilities-terminal.png
 
