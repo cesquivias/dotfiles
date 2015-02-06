@@ -10,6 +10,13 @@ done
 PLATFORM=`uname -o 2> /dev/null || uname -s`
 if [ $PLATFORM = "Cygwin" ]; then
     ln -s "$DIR/.startxwinrc" ~
+
+    # For ssh
+    ln -s ~ /home/$(basename $HOME)
+    mkdir -p ~/.ssh/keys
+    touch ~/.ssh/config
+    chown -R $USER:Users ~/.ssh
+    chmod -R 600 ~/.ssh
 fi
 
 # Install fish config

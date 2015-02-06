@@ -6,7 +6,8 @@
 
 [alias]
     st = status
-    df = diff --ignore-all-space --color
+    df = diff --ignore-all-space
+    dc = diff --cached
     co = checkout
     br = branch
     undo-commit = reset --soft HEAD^
