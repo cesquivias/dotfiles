@@ -119,7 +119,6 @@ fi
 export PATH=~/.bin:/opt/bin:/opt/local/bin:/opt/local/sbin:$PATH
 export EDITOR=emacsclient
 export PAGER=less
-export GREP_OPTIONS='--color=auto'
 
 if [ -f ~/.bashrc.local ]
 then
