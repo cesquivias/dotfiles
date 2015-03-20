@@ -1,8 +1,8 @@
 ; -*- mode: conf-windows;-*-
 
 [user]
-	name = Cristian Esquivias
-	email = cristian.esquivias@gmail.com
+	name = cristian
+	email = cristian@shopkick.com
 
 [alias]
     st = status
@@ -11,6 +11,7 @@
     co = checkout
     br = branch
     undo-commit = reset --soft HEAD^
+    amend = commit --amend
 
 [color]
     diff = auto
@@ -28,3 +29,5 @@
        changed = magenta
 [push]
 	default = simple
+[pull]
+	rebase = true
