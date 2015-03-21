@@ -11,3 +11,11 @@ function upd() {
         done
     fi
 }
+
+function make_basrclocal() {
+    if [ -e ~/.bashrc.local ]; then
+        return;
+    fi
+
+    echo "# -*- mode: shell-script;-*-" > ~/.bashrc.local
+}
