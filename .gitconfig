@@ -4,6 +4,9 @@
 	name = Cristian Esquivias
 	email = cristian.esquivias@gmail.com
 
+[include]
+    path = .gitconfig.local
+
 [alias]
     st = status
     df = diff --ignore-all-space
