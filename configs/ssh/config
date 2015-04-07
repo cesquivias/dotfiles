@@ -1,0 +1,10 @@
+Host github.com
+     User cesquivias
+     IdentityFile ~/.ssh/keys/gh
+
+Host bitbucket.org
+     User cristian
+     IdentityFile ~/.ssh/keys/bb
+
+Host *
+     CompressionLevel 9

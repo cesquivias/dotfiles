@@ -1,21 +1,22 @@
-CONFIGS = .hgrc .gitconfig .bash_profile .bashrc .bash_aliases \
-	.bash_functions .Xdefaults .screenrc
+CONFIGS = hgrc gitconfig bash_profile bashrc bash_aliases \
+	bash_functions Xdefaults screenrc ssh/config
 
 FISH_FUNCTIONS := $(wildcard fish_functions/*.fish)
 
 UNAME = $(shell uname -o 2> /dev/null || uname -s)
 ifeq ($(UNAME),Cygwin)
-CONFIGS += .startxwinrc ~/.ssh/config
+CONFIGS += startxwinrc
 endif
 
-all: $(patsubst .%, ~/.%, $(CONFIGS)) \
+all: $(patsubst %, ~/.%, $(CONFIGS)) \
 	$(patsubst fish_functions/%, ~/.config/fish/functions/%, $(FISH_FUNCTIONS))
 
 clean:
-	rm -f $(patsubst %, ~/%, $(CONFIGS))
+	rm -f $(patsubst %, ~/.%, $(CONFIGS))
 	rm -rf ~/.config/fish/functions
+	rm -ri ~/.ssh
 
-~/%: %
+~/.%: configs/%
 	ln -s $(abspath $<) $@
 
 /home/%:
@@ -25,7 +26,7 @@ clean:
 	mkdir -p $@
 
 ~/.ssh/config: | ~/.ssh/keys /home/$(USER)
-	touch $@
+	cp configs/ssh/config $@
 	setfacl -b $@
 	chgrp Users $@
 	chmod 0600 $@
