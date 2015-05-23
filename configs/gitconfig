@@ -13,6 +13,8 @@
     dc = diff --cached
     co = checkout
     br = branch
+    cp = cherry-pick
+    rb = rebase
     undo-commit = reset --soft HEAD^
     amend = commit --amend
 
