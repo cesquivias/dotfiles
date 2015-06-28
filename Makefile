@@ -42,6 +42,7 @@ endif
 
 ~/.ssh/keys/%: ~/.ssh/keys
 	ssh-keygen -q -t rsa -C $(USER)@$(HOSTNAME) -f $@
+	chmod -w $@ $@.pub
 
 ~/.config/fish/functions:
 	mkdir -p $@
