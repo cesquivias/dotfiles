@@ -24,20 +24,20 @@ clean:
 	rm -rf ~/.config/fish/functions
 	rm -ri ~/.ssh
 
-~/.%: configs/%
+~/.%: configs/% | $(BACKUP)
 	-mv -f $@ $(BACKUP)
 	ln -s $(abspath $<) $@
 
 /home/%:
 	ln -s ~ $@
 
-~/backups:
+$(BACKUP):
 	mkdir $@
 
 ~/.ssh/keys:
 	mkdir -p $@
 
-~/.ssh/config: | ~/.ssh/keys
+~/.ssh/config:
 	cp configs/ssh/config $@
 ifeq ($(UNAME),Cygwin)
 	setfacl -b $@
@@ -45,7 +45,7 @@ ifeq ($(UNAME),Cygwin)
 endif
 	chmod 0600 $@
 
-~/.ssh/keys/%: ~/.ssh/keys
+~/.ssh/keys/%: | ~/.ssh/keys
 	ssh-keygen -q -t rsa -C $(USER)@$(HOSTNAME) -f $@
 	chmod -w $@ $@.pub
 
