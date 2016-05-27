@@ -1,7 +1,7 @@
 CONFIGS = hgrc gitconfig bash_profile bashrc bash_aliases \
 	bash_functions Xdefaults screenrc ssh/config
 BACKUP = ~/backups
-DIRS=$(BACKUP)
+DIRS=$(BACKUP) ~/.bin
 
 SSH_KEYS = gh bb
 
@@ -32,7 +32,10 @@ clean:
 	ln -s ~ $@
 
 $(BACKUP):
-	mkdir $@
+	mkdir -p $@
+
+~/.bin:
+	mkdir -p $@
 
 ~/.ssh/keys:
 	mkdir -p $@
