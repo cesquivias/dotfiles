@@ -67,8 +67,11 @@ xterm*|rxvt*|screen)
     ;;
 esac
 
+# bash options
+set -o noclobber # Prevent overwriting a file by piping to it
+
 # enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
+if hash dircolors 2>/dev/null; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
@@ -116,7 +119,10 @@ then
 fi
 
 # Environment Variables
-export PATH=~/.bin:/opt/bin:/opt/local/bin:/opt/local/sbin:$PATH
+if [ -d /opt ]; then
+    export PATH=/opt/bin:/opt/local/bin:/opt/local/sbin:$PATH
+fi
+export PATH=~/.bin:$PATH
 export EDITOR=emacsclient
 export PAGER=less
 
