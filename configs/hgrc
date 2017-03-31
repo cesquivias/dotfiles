@@ -2,6 +2,7 @@
 
 [ui]
 username = Cristian Esquivias <cristian.esquivias@gmail.com>
+merge = internal:merge
 
 [alias]
 df = diff --ignore-all-space
