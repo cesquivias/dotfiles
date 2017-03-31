@@ -1,5 +1,5 @@
-CONFIGS = hgrc gitconfig bash_profile bashrc bash_aliases \
-	bash_functions Xdefaults screenrc ssh/config
+OUT ?= ~
+
 BACKUP = ~/backups
 DIRS=$(BACKUP) ~/.bin
 BIN =
@@ -11,8 +11,10 @@ FISH_FUNCTIONS := $(wildcard fish_functions/*.fish)
 UNAME = $(shell uname -o 2> /dev/null || uname -s)
 HOSTNAME = $(shell hostname)
 
+configs = $(patsubst configs/%, $(OUT)/.%, $(wildcard configs/*))
+configs += $(patsubst $(UNAME)/configs/%, $(OUT)/.%, $(wildcard $(UNAME)/configs/*))
+
 ifeq ($(UNAME),Cygwin)
-CONFIGS += startxwinrc
 DIRS += /home/$(USER)
 endif
 
@@ -20,18 +22,19 @@ ifeq ($(UNAME),Darwin)
 BIN += emacs emacsclient
 endif
 
-all: $(patsubst %, ~/.%, $(CONFIGS)) \
+all: $(configs) \
+	$(OUT)/.ssh/config \
 	$(patsubst fish_functions/%, ~/.config/fish/functions/%, $(FISH_FUNCTIONS)) \
 	$(patsubst %, ~/.ssh/keys/%, $(SSH_KEYS)) \
 	$(patsubst %, ~/.bin/%, $(BIN)) \
 	| $(DIRS)
 
 clean:
-	rm -f $(patsubst %, ~/.%, $(CONFIGS))
+	rm -f $(configs)
 	rm -rf ~/.config/fish/functions
 	rm -ri ~/.ssh
 
-~/.%: configs/% | $(BACKUP)
+~/.%: configs/% | $(BACKUP) $(DIRS)
 	-mv -f $@ $(BACKUP)
 	ln -s $(abspath $<) $@
 
