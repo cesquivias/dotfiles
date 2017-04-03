@@ -2,7 +2,6 @@ OUT ?= ~
 
 BACKUP = ~/backups
 DIRS=$(BACKUP) ~/.bin
-BIN =
 
 SSH_KEYS = gh bb
 
@@ -18,15 +17,13 @@ ifeq ($(UNAME),Cygwin)
 DIRS += /home/$(USER)
 endif
 
-ifeq ($(UNAME),Darwin)
-BIN += emacs emacsclient
-endif
+bins = $(patsubst $(UNAME)/bins/%, $(OUT)/.bin/%, $(wildcard $(UNAME)/bins/*))
 
 all: $(configs) \
+	$(bins) \
 	$(OUT)/.ssh/config \
 	$(patsubst fish_functions/%, ~/.config/fish/functions/%, $(FISH_FUNCTIONS)) \
 	$(patsubst %, ~/.ssh/keys/%, $(SSH_KEYS)) \
-	$(patsubst %, ~/.bin/%, $(BIN)) \
 	| $(DIRS)
 
 clean:
@@ -69,6 +66,9 @@ endif
 	cp $< $@
 
 ~/.bin/%: mac/% | ~/.bin
+	ln -s $(abspath $<) $@
+
+~/.bin/%: $(UNAME)/bins/%
 	ln -s $(abspath $<) $@
 
 .PHONY: all clean
