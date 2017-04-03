@@ -10,6 +10,7 @@ df = diff --ignore-all-space
 [extensions]
 color =
 pager =
+purge =
 
 [pager]
 pager = LESS='FRX' less
