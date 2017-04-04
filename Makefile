@@ -3,20 +3,19 @@ BACKUP ?= $(OUT)/backups
 
 SSH_KEYS = gh bb
 
-FISH_FUNCTIONS := $(wildcard fish_functions/*.fish)
-
 UNAME = $(shell uname -o 2> /dev/null || uname -s)
 HOSTNAME = $(shell hostname)
 
-configs = $(patsubst configs/%, $(OUT)/.%, $(wildcard configs/*))
+configs := $(patsubst configs/%, $(OUT)/.%, $(wildcard configs/*))
 configs += $(patsubst $(UNAME)/configs/%, $(OUT)/.%, $(wildcard $(UNAME)/configs/*))
 dirs := $(shell cat $(UNAME)/dirs 2> /dev/null) $(BACKUP) $(OUT)/.bin \
 	 $(OUT)/.ssh $(OUT)/.ssh/keys $(OUT)/.config/fish/functions
-bins = $(patsubst $(UNAME)/bins/%, $(OUT)/.bin/%, $(wildcard $(UNAME)/bins/*))
+bins := $(patsubst $(UNAME)/bins/%, $(OUT)/.bin/%, $(wildcard $(UNAME)/bins/*))
+fish_functions := $(patsubst fish/%, $(OUT)/.config/fish/functions/%, $(wildcard fish/*)) 
 
 all: $(configs) \
 	$(bins) \
-	$(patsubst fish_functions/%, $(OUT)/.config/fish/functions/%, $(FISH_FUNCTIONS)) \
+	$(fish_functions) \
 	$(OUT)/.ssh/config \
 	$(patsubst %, $(OUT)/.ssh/keys/%, $(SSH_KEYS))
 
