@@ -11,32 +11,31 @@ HOSTNAME = $(shell hostname)
 configs = $(patsubst configs/%, $(OUT)/.%, $(wildcard configs/*))
 configs += $(patsubst $(UNAME)/configs/%, $(OUT)/.%, $(wildcard $(UNAME)/configs/*))
 dirs := $(shell cat $(UNAME)/dirs 2> /dev/null) $(BACKUP) $(OUT)/.bin \
-	 $(OUT)/.ssh/keys $(OUT)/.config/fish/functions
+	 $(OUT)/.ssh $(OUT)/.ssh/keys $(OUT)/.config/fish/functions
 bins = $(patsubst $(UNAME)/bins/%, $(OUT)/.bin/%, $(wildcard $(UNAME)/bins/*))
 
 all: $(configs) \
 	$(bins) \
-	$(patsubst fish_functions/%, ~/.config/fish/functions/%, $(FISH_FUNCTIONS)) \
+	$(patsubst fish_functions/%, $(OUT)/.config/fish/functions/%, $(FISH_FUNCTIONS)) \
 	$(OUT)/.ssh/config \
-	$(patsubst %, ~/.ssh/keys/%, $(SSH_KEYS)) \
-	| $(dirs)
+	$(patsubst %, $(OUT)/.ssh/keys/%, $(SSH_KEYS))
 
 clean:
 	rm -f $(configs)
 	rm -rf ~/.config/fish/functions
 	rm -ri ~/.ssh
 
-~/.%: configs/% | $(BACKUP)
+$(OUT)/.%: configs/% | $(BACKUP)
 	-mv -f $@ $(BACKUP)
 	ln -s $(abspath $<) $@
 
-/home/%:
+/home/${USER}:
 	ln -s ~ $@
 
 $(dirs):
 	mkdir -p $@
 
-~/.ssh/config: ssh/config | ~/.ssh
+$(OUT)/.ssh/config: ssh/config | $(OUT)/.ssh
 	cp $< $@
 ifeq ($(UNAME),Cygwin)
 	setfacl -b $@
@@ -44,14 +43,14 @@ ifeq ($(UNAME),Cygwin)
 endif
 	chmod 0600 $@
 
-~/.ssh/keys/%: | ~/.ssh/keys
+$(OUT)/.ssh/keys/%: | $(OUT)/.ssh/keys
 	ssh-keygen -q -t rsa -C $(USER)@$(HOSTNAME) -f $@
 	chmod -w $@ $@.pub
 
-~/.config/fish/functions/%: fish_functions/%
+$(OUT)/.config/fish/functions/%: fish_functions/% | $(OUT)/.config/fish/functions
 	cp $< $@
 
-~/.bin/%: $(UNAME)/bins/%
+$(OUT)/.bin/%: $(UNAME)/bins/% | $(OUT)/.bin
 	ln -s $(abspath $<) $@
 
 .PHONY: all clean
