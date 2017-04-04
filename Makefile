@@ -50,8 +50,8 @@ $(BACKUP):
 ~/.ssh/keys:
 	mkdir -p $@
 
-~/.ssh/config: | ~/.ssh/keys
-	cp configs/ssh/config $@
+~/.ssh/config: ssh/config | ~/.ssh
+	cp $< $@
 ifeq ($(UNAME),Cygwin)
 	setfacl -b $@
 	chgrp Users $@
