@@ -1,7 +1,5 @@
 OUT ?= ~
-
-BACKUP = ~/backups
-DIRS=$(BACKUP) ~/.bin
+BACKUP ?= $(OUT)/backups
 
 SSH_KEYS = gh bb
 
@@ -12,39 +10,30 @@ HOSTNAME = $(shell hostname)
 
 configs = $(patsubst configs/%, $(OUT)/.%, $(wildcard configs/*))
 configs += $(patsubst $(UNAME)/configs/%, $(OUT)/.%, $(wildcard $(UNAME)/configs/*))
-
-ifeq ($(UNAME),Cygwin)
-DIRS += /home/$(USER)
-endif
-
+dirs := $(shell cat $(UNAME)/dirs 2> /dev/null) $(BACKUP) $(OUT)/.bin \
+	 $(OUT)/.ssh/keys $(OUT)/.config/fish/functions
 bins = $(patsubst $(UNAME)/bins/%, $(OUT)/.bin/%, $(wildcard $(UNAME)/bins/*))
 
 all: $(configs) \
 	$(bins) \
-	$(OUT)/.ssh/config \
 	$(patsubst fish_functions/%, ~/.config/fish/functions/%, $(FISH_FUNCTIONS)) \
+	$(OUT)/.ssh/config \
 	$(patsubst %, ~/.ssh/keys/%, $(SSH_KEYS)) \
-	| $(DIRS)
+	| $(dirs)
 
 clean:
 	rm -f $(configs)
 	rm -rf ~/.config/fish/functions
 	rm -ri ~/.ssh
 
-~/.%: configs/% | $(BACKUP) $(DIRS)
+~/.%: configs/% | $(BACKUP)
 	-mv -f $@ $(BACKUP)
 	ln -s $(abspath $<) $@
 
 /home/%:
 	ln -s ~ $@
 
-$(BACKUP):
-	mkdir -p $@
-
-~/.bin:
-	mkdir -p $@
-
-~/.ssh/keys:
+$(dirs):
 	mkdir -p $@
 
 ~/.ssh/config: | ~/.ssh/keys
@@ -59,14 +48,8 @@ endif
 	ssh-keygen -q -t rsa -C $(USER)@$(HOSTNAME) -f $@
 	chmod -w $@ $@.pub
 
-~/.config/fish/functions:
-	mkdir -p $@
-
-~/.config/fish/functions/%: fish_functions/% | ~/.config/fish/functions
+~/.config/fish/functions/%: fish_functions/%
 	cp $< $@
-
-~/.bin/%: mac/% | ~/.bin
-	ln -s $(abspath $<) $@
 
 ~/.bin/%: $(UNAME)/bins/%
 	ln -s $(abspath $<) $@
