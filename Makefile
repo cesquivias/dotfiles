@@ -46,7 +46,7 @@ $(OUT)/.ssh/keys/%: | $(OUT)/.ssh/keys
 	ssh-keygen -q -t rsa -C $(USER)@$(HOSTNAME) -f $@
 	chmod -w $@ $@.pub
 
-$(OUT)/.config/fish/functions/%: fish_functions/% | $(OUT)/.config/fish/functions
+$(OUT)/.config/fish/functions/%: fish/% | $(OUT)/.config/fish/functions
 	cp $< $@
 
 $(OUT)/.bin/%: $(UNAME)/bins/% | $(OUT)/.bin
