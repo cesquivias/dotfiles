@@ -28,6 +28,10 @@ $(OUT)/.%: configs/% | $(BACKUP)
 	-mv -f $@ $(BACKUP)
 	ln -s $(abspath $<) $@
 
+$(OUT)/.%: $(UNAME)/configs/% | $(BACKUP)
+	-mv -f $@ $(BACKUP)
+	ln -s $(abspath $<) $@
+
 /home/${USER}:
 	ln -s ~ $@
 
