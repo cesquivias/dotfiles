@@ -5,6 +5,3 @@ Host github.com
 Host bitbucket.org
      User cristian
      IdentityFile ~/.ssh/keys/bb
-
-Host *
-     CompressionLevel 9
