@@ -11,7 +11,7 @@ configs += $(patsubst $(UNAME)/configs/%, $(OUT)/.%, $(wildcard $(UNAME)/configs
 dirs := $(shell cat $(UNAME)/dirs 2> /dev/null) $(BACKUP) $(OUT)/.bin \
 	 $(OUT)/.ssh $(OUT)/.ssh/keys $(OUT)/.config/fish/functions
 bins := $(patsubst $(UNAME)/bins/%, $(OUT)/.bin/%, $(wildcard $(UNAME)/bins/*))
-fish_functions := $(patsubst fish/%, $(OUT)/.config/fish/functions/%, $(wildcard fish/*)) 
+fish_functions := $(patsubst fish/%, $(OUT)/.config/fish/%, $(shell find fish -type f)) 
 
 all: $(configs) \
 	$(bins) \
@@ -50,8 +50,8 @@ $(OUT)/.ssh/keys/%: | $(OUT)/.ssh/keys
 	ssh-keygen -q -t rsa -C $(USER)@$(HOSTNAME) -f $@
 	chmod -w $@ $@.pub
 
-$(OUT)/.config/fish/functions/%: fish/% | $(OUT)/.config/fish/functions
-	cp $< $@
+$(OUT)/.config/fish/%: fish/% | $(OUT)/.config/fish/functions
+	ln -s $(abspath $<) $@
 
 $(OUT)/.bin/%: $(UNAME)/bins/% | $(OUT)/.bin
 	ln -s $(abspath $<) $@
