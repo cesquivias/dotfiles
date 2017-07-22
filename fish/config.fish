@@ -3,3 +3,5 @@ for path in /opt/local/sbin /opt/local/bin /opt/bin ~/.bin
         set -x PATH $path $PATH
     end
 end
+
+set -x EDITOR emacsclient
