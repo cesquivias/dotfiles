@@ -7,8 +7,7 @@ UNAME = $(shell uname -o 2> /dev/null || uname -s)
 HOSTNAME = $(shell hostname)
 
 configs := $(notdir $(wildcard configs/*) $(wildcard $(UNAME)/configs/*))
-out_configs := $(patsubst configs/%, $(OUT)/.%, $(wildcard configs/*))
-out_configs += $(patsubst $(UNAME)/configs/%, $(OUT)/.%, $(wildcard $(UNAME)/configs/*))
+out_configs := $(addprefix $(OUT)/., $(configs))
 dirs := $(OUT) $(BACKUP) $(shell cat $(UNAME)/dirs 2> /dev/null) $(OUT)/.bin \
 	 $(OUT)/.ssh $(OUT)/.ssh/keys $(OUT)/.config/fish/functions
 bins := $(patsubst $(UNAME)/bins/%, $(OUT)/.bin/%, $(wildcard $(UNAME)/bins/*))
