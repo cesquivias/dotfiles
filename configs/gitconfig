@@ -17,6 +17,7 @@
     rb = rebase
     undo-commit = reset --soft HEAD^
     amend = commit --amend
+    pop = stash pop
 
 [color]
     diff = auto
@@ -32,7 +33,9 @@
        added = cyan
        untracked = yellow
        changed = magenta
+
 [push]
 	default = simple
+
 [pull]
 	rebase = true
