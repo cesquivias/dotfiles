@@ -9,11 +9,12 @@ HOSTNAME = $(shell hostname)
 configs := $(notdir $(wildcard configs/*) $(wildcard $(UNAME)/configs/*))
 out_configs := $(addprefix $(OUT)/., $(configs))
 dirs := $(OUT) $(BACKUP) $(shell cat $(UNAME)/dirs 2> /dev/null) $(OUT)/.bin \
-	 $(OUT)/.ssh $(OUT)/.ssh/keys $(OUT)/.config/fish/functions
+	 $(OUT)/.ssh $(OUT)/.ssh/keys $(OUT)/.config/fish/functions \
+	 $(BACKUP)/.config/fish/functions
 bins := $(patsubst $(UNAME)/bins/%, $(OUT)/.bin/%, $(wildcard $(UNAME)/bins/*))
 fish_functions := $(patsubst fish/%, $(OUT)/.config/fish/%, $(shell find fish -type f)) 
 # TODO : back up fish and ssh config files
-backups := $(addprefix $(BACKUP)/., $(configs))
+backups := $(BACKUP)/.ssh $(BACKUP)/.config/fish $(addprefix $(BACKUP)/., $(configs))
 
 all: $(out_configs) \
 	$(bins) \
@@ -21,7 +22,7 @@ all: $(out_configs) \
 	$(OUT)/.ssh/config \
 	$(patsubst %, $(OUT)/.ssh/keys/%, $(SSH_KEYS))
 
-backup: $(backups) | $(BACKUP)
+backup: $(backups)
 
 clean:
 	$(RM) $(out_configs)
@@ -33,9 +34,6 @@ $(OUT)/.%: configs/% | $(OUT)
 
 $(OUT)/.%: $(UNAME)/configs/%
 	ln -s $(abspath $<) $@
-
-/home/${USER}:
-	ln -s ~ $@
 
 $(dirs):
 	mkdir -p $@
@@ -58,7 +56,7 @@ $(OUT)/.config/fish/%: fish/% | $(OUT)/.config/fish/functions
 $(OUT)/.bin/%: $(UNAME)/bins/% | $(OUT)/.bin
 	ln -s $(abspath $<) $@
 
-$(BACKUP)/%:
-	$(if $(wildcard $(OUT)/$*), mv $(OUT)/$* $@)
+$(BACKUP)/%: | $(BACKUP) $(BACKUP)/.config/fish/functions
+	$(if $(wildcard $(OUT)/$*), cp -r $(OUT)/$* $@)
 
 .PHONY: all backup clean
