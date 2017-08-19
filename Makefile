@@ -24,9 +24,9 @@ all: $(out_configs) \
 backup: $(backups) | $(BACKUP)
 
 clean:
-	rm -f $(out_configs)
-	rm -rf ~/.config/fish/functions
-	rm -ri ~/.ssh
+	$(RM) $(out_configs)
+	$(RM) $(fish_functions)
+	$(if $(wildcard $(OUT)/.ssh), $(RM) -rdI $(OUT)/.ssh)
 
 $(OUT)/.%: configs/% | $(OUT)
 	ln -s $(abspath $<) $@
