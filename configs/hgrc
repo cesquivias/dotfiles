@@ -15,3 +15,5 @@ purge =
 [pager]
 pager = LESS='FRX' less
 attend = diff, df, log, help
+
+%include ~/.hgrc.local
