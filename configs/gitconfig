@@ -15,6 +15,7 @@
     br = branch
     cp = cherry-pick
     rb = rebase
+    pwb = rev-parse --abbrev-ref HEAD ; present working branch
     undo-commit = reset --soft HEAD^
     amend = commit --amend
     pop = stash pop
