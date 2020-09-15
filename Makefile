@@ -16,6 +16,8 @@ fish_functions := $(patsubst fish/%, $(OUT)/.config/fish/%, $(shell find fish -t
 # TODO : back up fish and ssh config files
 backups := $(BACKUP)/.ssh $(BACKUP)/.config/fish $(addprefix $(BACKUP)/., $(configs))
 
+LN = ln -f -s
+
 all: $(out_configs) \
 	$(bins) \
 	$(fish_functions) \
@@ -30,10 +32,10 @@ clean:
 	$(if $(wildcard $(OUT)/.ssh), $(RM) -rdI $(OUT)/.ssh)
 
 $(OUT)/.%: configs/% | $(OUT)
-	ln -s $(abspath $<) $@
+	$(LN) $(abspath $<) $@
 
 $(OUT)/.%: $(UNAME)/configs/%
-	ln -s $(abspath $<) $@
+	$(LN) $(abspath $<) $@
 
 $(dirs):
 	mkdir -p $@
@@ -51,10 +53,10 @@ $(OUT)/.ssh/keys/%: | $(OUT)/.ssh/keys
 	chmod -w $@ $@.pub
 
 $(OUT)/.config/fish/%: fish/% | $(OUT)/.config/fish/functions
-	ln -s $(abspath $<) $@
+	$(LN) $(abspath $<) $@
 
 $(OUT)/.bin/%: $(UNAME)/bins/% | $(OUT)/.bin
-	ln -s $(abspath $<) $@
+	$(LN) $(abspath $<) $@
 
 $(BACKUP)/%: | $(BACKUP) $(BACKUP)/.config/fish/functions
 	$(if $(wildcard $(OUT)/$*), cp -r $(OUT)/$* $@)
