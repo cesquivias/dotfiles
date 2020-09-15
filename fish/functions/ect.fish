@@ -1,3 +1,3 @@
-function ecct
+function ect
     emacsclient -t $argv
 end
