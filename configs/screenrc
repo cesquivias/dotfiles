@@ -10,6 +10,7 @@ autodetach on
 # don't display the copyright page
 startup_message off
 
+term screen-256color
 defscrollback 5000
 
 ################
