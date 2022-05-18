@@ -1,0 +1,10 @@
+env:
+  TERM: xterm-256color
+
+window:
+  dimensions:
+    lines: 70
+    columns: 80
+
+window:
+  opacity: 0.95
