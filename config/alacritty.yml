@@ -3,8 +3,7 @@ env:
 
 window:
   dimensions:
-    lines: 70
+    lines: 75
     columns: 80
 
-window:
   opacity: 0.95
