@@ -1,7 +1,7 @@
 OUT ?= ~
 BACKUP ?= $(OUT)/backups
 
-SSH_KEYS = gh bb
+SSH_KEYS = gh
 
 # The name of the platform (e.g., Cygwin, Darwin)
 UNAME := $(shell uname -o 2> /dev/null || uname -s)
