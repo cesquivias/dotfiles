@@ -12,7 +12,8 @@ home := $(notdir $(wildcard home/*) $(wildcard $(UNAME)/home/*))
 out_home := $(addprefix $(OUT)/., $(home))
 
 # Files to put in ~/.config dir
-configs := $(notdir $(wildcard config/*) $(wildcard $(UNAME)/config/*))
+configs := $(patsubst config/%, %, $(shell find config/ -type f)) \
+	$(patsubst $(UNAME)/config/%, %, $(shell find $(UNAME)/config/ -type f))
 out_configs := $(addprefix $(OUT)/.config/, $(configs))
 
 # Directories required to exist
@@ -31,6 +32,7 @@ out_files := $(patsubst $(UNAME)/out/%, $(OUT)/%, $(shell find $(UNAME)/out/ -ty
 backups := $(BACKUP)/.ssh $(BACKUP)/.config/fish $(addprefix $(BACKUP)/., $(home))
 
 LN = ln -f -s
+MKDIR = mkdir -p
 
 all: $(out_home) \
 	$(out_configs) \
@@ -54,9 +56,11 @@ $(OUT)/.%: $(UNAME)/home/%
 	$(LN) $(abspath $<) $@
 
 $(OUT)/.config/%: config/% | $(OUT)/.config
+	$(MKDIR) $(dir $@)
 	$(LN) $(abspath $<) $@
 
 $(OUT)/.config/%: $(UNAME)/config/%
+	$(MKDIR) $(dir $@)
 	$(LN) $(abspath $<) $@
 
 $(dirs):
